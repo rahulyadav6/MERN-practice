@@ -8,7 +8,7 @@ const signUpSchema = z.object({
     .max(255, {message: "Name is too long"}),
 
     email: z
-    .string({required_error: "Email is required "})
+    .string({required_error: "Email is required ", invalid_type_error: "email must be a string"})
     .trim()
     .email({message: "Invalid email  address "})
     .min(3, {message: "Email must be atleast of 3 characters"})
