@@ -21,10 +21,17 @@ const signUpSchema = z.object({
     .max(20, {message: "Phone is too long"}),
     
     password: z
-    .string({required_error: "Password is required "})
+    .string()
     .trim()
-    .min(10, {message: "Password must be of atleast 6 characters"})
-    .max(1024, {message: "Password is too long"}),  
+    .min(10, { message: "Password must be at least 10 characters long" })
+    .max(1024, { message: "Password is too long" })
+    .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+    .regex(/\d/, { message: "Password must contain at least one number" })
+    .regex(/[\W_]/, { message: "Password must contain at least one special character" }),
 });
 
 module.exports = signUpSchema;
+
+
+
