@@ -23,7 +23,7 @@ const signUpSchema = z.object({
     password: z
     .string()
     .trim()
-    .min(10, { message: "Password must be at least 10 characters long" })
+    .min(8, { message: "Password must be at least 8 characters long" })
     .max(1024, { message: "Password is too long" })
     .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
     .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
@@ -31,7 +31,27 @@ const signUpSchema = z.object({
     .regex(/[\W_]/, { message: "Password must contain at least one special character" }),
 });
 
-module.exports = signUpSchema;
+const loginSchema = z.object({
+    email: z
+    .string({required_error: "Email is required ", invalid_type_error: "email must be a string"})
+    .trim()
+    .email({message: "Invalid email  address "})
+    .min(3, {message: "Email must be atleast of 3 characters"})
+    .max(255, {message: "Email is too long"}),
+
+
+    password: z
+    .string()
+    .trim()
+    .min(8, { message: "Password must be at least 8 characters long" })
+    .max(1024, { message: "Password is too long" })
+    .regex(/[A-Z]/, { message: "Password must contain at least one uppercase letter" })
+    .regex(/[a-z]/, { message: "Password must contain at least one lowercase letter" })
+    .regex(/\d/, { message: "Password must contain at least one number" })
+    .regex(/[\W_]/, { message: "Password must contain at least one special character" }),
+})
+
+module.exports = {signUpSchema, loginSchema};
 
 
 
