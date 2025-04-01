@@ -29,7 +29,7 @@ const register = async(req,res)=>{
         });
     }catch(error){
         // res.status(500).send("Internal server error");
-        next(error);
+        next(error);    
     }
 }
 
@@ -40,23 +40,27 @@ const login = async(req, res)=>{
         console.log(userExist);
         
         if(!userExist){
-            return res.status(400).json({message:"Invalid Credentials"});
+            const error = new Error("Invalid Credentials");
+            error.status = 400;
+            return next(error);
         }
 
         // const user = await bcrypt.compare(password, userExist.password);
 
         // complicated method of doing same thing i,e comparing password
-        const user = await userExist.comparePassword(password);
+        const isMatch = await userExist.comparePassword(password);
 
-        if(user){
-            res.status(200).json({
-                msg:  "Login successful",
-                token: await userExist.generateToken(),
-                userId: userExist._id.toString(),
-            });
-        }else{
-            res.status(401).json({message:"Invalid email or password"});
+        if(!isMatch){
+            const error = new Error("Invalid email or password");
+            error.status = 401;
+            return next(error); 
         }
+
+        res.status(200).json({
+            msg: "Login successful",
+            token: await userExist.generateToken(),
+            userId: userExist._id.toString(),
+        });
 
     }catch(error){
         // return res.status(500).json({"error": "Internal server error"});
