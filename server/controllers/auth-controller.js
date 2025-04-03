@@ -33,29 +33,30 @@ const register = async(req,res)=>{
     }
 }
 
-const login = async(req, res)=>{
+const login = async(req, res, next)=>{
     try {
         const { email, password } = req.body;
         const userExist = await User.findOne({ email });
-        console.log(userExist);
         
         if(!userExist){
             const error = new Error("Invalid Credentials");
             error.status = 400;
             return next(error);
         }
-
+        
         // const user = await bcrypt.compare(password, userExist.password);
-
+        
         // complicated method of doing same thing i,e comparing password
         const isMatch = await userExist.comparePassword(password);
-
+        
         if(!isMatch){
             const error = new Error("Invalid email or password");
             error.status = 401;
             return next(error); 
         }
-
+        // throw new Error();
+        // console.log(userExist);
+        
         res.status(200).json({
             msg: "Login successful",
             token: await userExist.generateToken(),
