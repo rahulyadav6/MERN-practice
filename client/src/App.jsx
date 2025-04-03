@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { BrowserRouter, Route, Routes }  from "react-router-dom"
-import pages from "./pages/Index"
+import { BrowserRouter, Route, Routes }  from "react-router-dom";
+import pages from "./pages/Index";
+import Navbar from "./components/Navbar";
 function App() {
 
   return (
     <>
       <BrowserRouter>
+      <Navbar/>
         <Routes>
           <Route path="/" element={<pages.Home/>} />
           <Route path="/about" element={<pages.About/>} />

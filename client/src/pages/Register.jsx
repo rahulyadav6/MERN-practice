@@ -2,7 +2,15 @@ import React from 'react'
 
 const Register = () => {
   return (
-    <div>Register</div>
+    <>
+        <section>
+            <main>
+                <div className='section-registration'>
+                    
+                </div>
+            </main>
+        </section>
+    </>
   )
 }
 
