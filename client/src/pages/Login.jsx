@@ -28,8 +28,8 @@ const Login = () => {
                 <img
                   src="/images/login.png"
                   alt="Let's fill the login form"
-                  width="350"
-                  height="350"
+                  width="400"
+                  height="400"
                 />
               </div>
               {/* lets tackle form */}
