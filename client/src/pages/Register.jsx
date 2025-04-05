@@ -29,8 +29,9 @@ const Register = () => {
                       </div>
                       {/* lets tackle form */}
                       <div className='registration-form'>
-                        <h1 className='main-heading mb-3'>Registration Form</h1>
+                        <h1 className='main-heading'>Registration Form</h1>
                         <br/>
+                        <div className='form-div'>
                         <form onSubmit={handleSubmit} >
                           <div>
                             <label htmlFor='username'>username</label>
@@ -93,6 +94,7 @@ const Register = () => {
                           <button type='submit' className='btn btn-submit'>Register</button>
 
                         </form>
+                        </div>
                       </div>
                     </div>
                 </div>

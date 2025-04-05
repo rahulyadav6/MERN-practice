@@ -2,6 +2,7 @@
 import { BrowserRouter, Route, Routes }  from "react-router-dom";
 import pages from "./pages/Index";
 import Navbar from "./components/Navbar";
+import Footer from "./components/footer/Footer";
 function App() {
 
   return (
@@ -15,7 +16,9 @@ function App() {
           <Route path="service" element={<pages.Service/>} />
           <Route path="register" element={<pages.Register/>} />
           <Route path="login" element={<pages.Login/>} />
+          <Route path="*"  element={<pages.Error/>}/>
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </>
   )
