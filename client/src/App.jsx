@@ -16,6 +16,7 @@ function App() {
           <Route path="service" element={<pages.Service/>} />
           <Route path="register" element={<pages.Register/>} />
           <Route path="login" element={<pages.Login/>} />
+          <Route path="logout" element={<pages.Logout/>}/>
           <Route path="*"  element={<pages.Error/>}/>
         </Routes>
         <Footer/>

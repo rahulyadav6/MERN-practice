@@ -5,6 +5,7 @@ import Login from './Login';
 import Register from './Register';
 import Service from './Service';
 import Error from './Error';
+import { Logout } from './Logout';
 
-const pages =  { Home, About, Contact, Login, Register, Service, Error };
+const pages =  { Home, About, Contact, Login, Register, Logout, Service, Error };
 export default pages;
