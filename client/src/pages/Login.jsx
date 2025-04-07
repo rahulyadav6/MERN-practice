@@ -1,8 +1,12 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../store/auth";
 
 const Login = () => {
+
+  const { storeInLs } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email:"",
@@ -31,7 +35,8 @@ const Login = () => {
         })
         alert("Login successful");
         console.log(response.data);
-        localStorage.setItem("token", response.data.token);
+        // localStorage.setItem("token", response.data.token);
+        storeInLs(response.data.token);
         navigate("/");
       }else{
         alert("Invalid Credential");
