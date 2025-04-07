@@ -1,6 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     email:"",
     password:"",
@@ -14,9 +17,28 @@ const Login = () => {
       [name]: value
     })
   }
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
-    
+    try {      
+      const response = await axios.post(`http://localhost:5000/api/auth/login`, {
+        email: user.email.trim(),
+        password: user.password.trim()
+      });
+      if(response.status === 200){
+        setUser({
+          email:"",
+          password:""
+        })
+        alert("Login successful");
+        console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
+      }else{
+        alert("Invalid Credential");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
     <>
@@ -69,7 +91,7 @@ const Login = () => {
 
                   <br />
 
-                  <button type="submit" className="btn btn-submit">
+                  <button type="Login" className="btn btn-submit">
                     Register
                   </button>
                 </form>

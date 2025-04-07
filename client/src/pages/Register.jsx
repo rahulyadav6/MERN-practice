@@ -22,6 +22,7 @@ const Register = () => {
     e.preventDefault();
     try{
       const response = await axios.post(`http://localhost:5000/api/auth/register`, user);
+      
       if(response.status === 201) {
         // Registration successful
         alert("Registration successful! Please login.");
@@ -36,7 +37,6 @@ const Register = () => {
         navigate("/login");
       }
     }catch(error){
-      // Show user-friendly error message
       const errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
       alert(errorMessage);
       console.error("Registration failed:", error.response?.data || error.message);
