@@ -17,7 +17,7 @@ const Navbar = () => {
                     <li><NavLink to="/service">Services</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
                     {isLoggedIn? (
-                        <li><NavLink to="/register">Logout</NavLink></li>
+                        <li><NavLink to="/logout">Logout</NavLink></li>
                     ): (
                         <>
                             <li><NavLink to="/register">Register</NavLink></li>
