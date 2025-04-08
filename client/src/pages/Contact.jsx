@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/auth";
+import axios from "axios";
 
 const Contact = () => {
   const [contact, setContact] = useState({
@@ -27,8 +28,27 @@ const Contact = () => {
     });
   }; 
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:5000/api/form/contact", {
+        username: contact.username,
+        email: contact.email,
+        message: contact.message
+      });
+      
+      if(response.status === 200){
+        alert("Message sent successfully");
+        setContact({
+          ...contact,
+          message:""
+        })
+      }
+
+    } catch (error) {
+      console.error(`Error sending message ${error}`);      
+    }
+
 
   }
   return (
