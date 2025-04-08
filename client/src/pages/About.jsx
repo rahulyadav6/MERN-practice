@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Analytics from '../components/Analytics'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../store/auth'
 
 const About = () => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       <main>
         <section className="section-hero">
           <div className="container grid grid-two-cols">
             <div className="hero-content">
-              {/* <p>We care to cure your Health</p> */}
+              {user && 
+              <p style={{ backgroundColor: 'yellow', padding: '8px', borderRadius: '4px', color: 'black', fontWeight: 'bold' }}>Hey {user.username} here is why you should choose us</p>
+              }
               <h1>Why Choose Us? </h1>
               <p>
                 Expertise: Our team consists of experienced IT professionals who
