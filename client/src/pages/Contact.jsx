@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../store/auth";
 
 const Contact = () => {
   const [contact, setContact] = useState({
@@ -6,6 +7,17 @@ const Contact = () => {
     email:"",
     message:""
   });
+
+  const [userData, setUserData]  = useState(true);
+  const { user } = useContext(AuthContext);
+  if(userData && user){
+    setContact({
+      username: user.username,
+      email: user.email,
+      message:"",
+    });
+    setUserData(false);
+  }
   const handleInput = (e)=>{
     const name = e.target.name;
     const value = e.target.value;
@@ -80,11 +92,15 @@ const Contact = () => {
         </div>
 
         <section className="mb-3">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4940.228745400387!2d75.70368819552925!3d31.260672073366084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5fca6a8887f9%3A0x48044ce5b6683280!2sLPU%20FRONT%20ENTRANCE%20GATE!5e0!3m2!1sen!2sin!4v1743860305766!5m2!1sen!2sin"
-        width="100%" 
-        height="450" 
-        allowFullScreen
-        loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4940.228745400387!2d75.70368819552925!3d31.260672073366084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a5fca6a8887f9%3A0x48044ce5b6683280!2sLPU%20FRONT%20ENTRANCE%20GATE!5e0!3m2!1sen!2sin!4v1743860305766!5m2!1sen!2sin"
+          width="100%" 
+          height="450" 
+          allowFullScreen
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          style={{ touchAction: 'none' }}
+        ></iframe>
         </section>
       </section>
     </>
