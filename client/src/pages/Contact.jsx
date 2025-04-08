@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../store/auth";
 
 const Contact = () => {
@@ -7,17 +7,16 @@ const Contact = () => {
     email:"",
     message:""
   });
-
-  const [userData, setUserData]  = useState(true);
   const { user } = useContext(AuthContext);
-  if(userData && user){
-    setContact({
-      username: user.username,
-      email: user.email,
-      message:"",
-    });
-    setUserData(false);
-  }
+  useEffect(()=>{
+    if(user){
+      setContact({
+        username: user.username,
+        email: user.email,
+        message:"",
+      });
+    }
+  },[user]);
   const handleInput = (e)=>{
     const name = e.target.name;
     const value = e.target.value;
@@ -30,6 +29,7 @@ const Contact = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+
   }
   return (
     <>
