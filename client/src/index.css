@@ -390,13 +390,17 @@ a.active {
 ** services section css
 ** -------------------------  */
 
-.section-services {
+ .section-services {
   & .container:first-child {
     padding: 0;
+    margin: 0 auto; /* Center the container */
+    max-width: 1200px; /* Set a max width for the container */
   }
   & .grid-three-cols {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3.2rem;
+    display: grid; /* Ensure grid display */
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 2rem;
+    margin: 0 1rem; /* Add margin on the x-axis */
   }
 
   & .card {
@@ -408,7 +412,7 @@ a.active {
     & .card-img {
       text-align: center;
       & img {
-        width: 70%;
+        width: 100%; /* Adjusted to take full width of the card */
         height: auto;
         filter: drop-shadow(0 0 2rem 2rem #fff);
         -webkit-filter: drop-shadow(0 0 2rem 2rem #fff);
@@ -423,8 +427,8 @@ a.active {
       }
 
       & h2 {
-        font-size: 3.2rem;
-        margin: 1.2rem 0 2.4rem 0;
+        font-size: 2rem;
+        margin: 1rem 0 2.4rem 0;
       }
     }
   }

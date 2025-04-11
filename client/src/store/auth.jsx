@@ -9,6 +9,7 @@ export const AuthProvider = ({children})=>{
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
     const [user, setUser] = useState("");
+    const [services, setServices] = useState([])
     
     useEffect(()=>{
         setIsLoggedIn(!!token);
@@ -54,7 +55,29 @@ export const AuthProvider = ({children})=>{
 
 
 
-    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user }}>
+    const getServices = async () => {
+        try {
+            const response = await axios.get("http://localhost:5000/api/data/service");
+            if (response.status === 200) {
+                const data = response.data;
+                console.log("Fetched services data:", data.services);
+                setServices(data.services);
+            } else {
+                console.error(`Error fetching services: ${response.status}`);
+            }
+        } catch (error) {
+            console.error(`Services frontend error: ${error.message}`);
+        }
+    };
+
+    useEffect(() => {
+        userAuthentication(); 
+        getServices(); 
+    }, []);
+
+
+
+    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user, services }}>
         {children}
     </AuthContext.Provider>
 }
