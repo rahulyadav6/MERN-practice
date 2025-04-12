@@ -21,7 +21,8 @@ const Register = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.post(`http://localhost:5000/api/auth/register`, user);
+      const response = await axios.post(`http://localhost:5000/api/auth/register`, user); 
+
       
       if(response.status === 201) {
         // Registration successful
@@ -35,11 +36,12 @@ const Register = () => {
         });
         // Redirect to login page
         navigate("/login");
+      } else {
+        alert(response.data.extraDetails || "Registration failed. Please try again.");
       }
-    }catch(error){
-      const errorMessage = error.response?.data?.message || "Registration failed. Please try again.";
-      alert(errorMessage);
-      console.error("Registration failed:", error.response?.data || error.message);
+    } catch (error) {
+      console.log(error);
+      alert(error.response?.data?.extraDetails || error.response?.data?.message || "Registration failed. Please try again.");
     }
   }
   return (
