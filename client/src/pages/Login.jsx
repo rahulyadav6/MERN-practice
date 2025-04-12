@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../store/auth";
+import {  toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -33,7 +34,7 @@ const Login = () => {
           email:"",
           password:""
         })
-        alert("Login successful");
+        toast.success("Login successful");
         console.log(response.data);
         // localStorage.setItem("token", response.data.token);
         storeInLs(response.data.token);
@@ -43,7 +44,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.extraDetails || error.response?.data?.message || "Failed to login Try again");
+      toast.error(error.response?.data?.extraDetails || error.response?.data?.message || "Failed to login Try again");
     }
   }
   return (
