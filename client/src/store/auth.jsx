@@ -10,6 +10,7 @@ export const AuthProvider = ({children})=>{
     const [isLoggedIn, setIsLoggedIn] = useState(!!token);
     const [user, setUser] = useState("");
     const [services, setServices] = useState([])
+    const authorizationToken = `Bearer ${token}`
     
     useEffect(()=>{
         setIsLoggedIn(!!token);
@@ -34,7 +35,7 @@ export const AuthProvider = ({children})=>{
         try {
             const response = await axios.get("http://localhost:5000/api/auth/user", {
                 headers:{
-                    Authorization: `Bearer ${token}`
+                    Authorization: authorizationToken
                 }
             });
             if(response.status === 200){
@@ -77,7 +78,7 @@ export const AuthProvider = ({children})=>{
 
 
 
-    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user, services }}>
+    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user, services, authorizationToken }}>
         {children}
     </AuthContext.Provider>
 }

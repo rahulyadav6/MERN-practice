@@ -12,6 +12,16 @@ const getAllUsers = async(req,res)=>{
     }
 }
 
+const deleteUserById = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        await User.deleteOne({_id: id});
+        return res.status(200).json({message: "User deleted successfully"})
+    } catch (error) {
+        next(error)
+    }
+}
+
 const getAllContacts = async(req,res)=>{
     try{
         const contacts = await Contact.find({});
@@ -23,4 +33,4 @@ const getAllContacts = async(req,res)=>{
         next(error);
     }
 }
-module.exports = {getAllUsers, getAllContacts};
+module.exports = {getAllUsers, getAllContacts, deleteUserById};

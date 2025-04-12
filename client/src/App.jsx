@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes }  from "react-router-dom";
 import pages from "./pages/Index";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer/Footer";
+import AdminLayout from "./components/layout/AdminLayout";
+import AdminContacts from "./pages/AdminContacts";
+import AdminUsers from "./pages/AdminUsers";
 function App() {
 
   return (
@@ -18,6 +21,11 @@ function App() {
           <Route path="login" element={<pages.Login/>} />
           <Route path="logout" element={<pages.Logout/>}/>
           <Route path="*"  element={<pages.Error/>}/>
+
+          <Route path="/admin" element={<AdminLayout/>}>
+            <Route path="users" element={<AdminUsers/>} />
+            <Route path="contacts" element={<AdminContacts/>} />
+          </Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
