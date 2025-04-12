@@ -41,6 +41,7 @@ const login = async(req, res, next)=>{
         if(!userExist){
             const error = new Error("Invalid Credentials");
             error.status = 400;
+            error.extraDetails ="Invalid email";
             return next(error);
         }
         
@@ -49,11 +50,10 @@ const login = async(req, res, next)=>{
         // complicated method of doing same thing i,e comparing password
         const isMatch = await userExist.comparePassword(password);
         
-        if(!isMatch){
-            const error = new Error("Invalid email or password");
-            error.status = 401;
-            return next(error); 
-        }
+        const error = new Error("Invalid email or password");
+        error.status = 401;
+        error.extraDetails = "Invalid password";
+        return next(error); 
         // throw new Error();
         // console.log(userExist);
         

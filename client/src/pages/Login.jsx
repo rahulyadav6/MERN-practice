@@ -43,6 +43,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
+      alert(error.response?.data?.extraDetails || error.response?.data?.message || "Failed to login Try again");
     }
   }
   return (
@@ -97,7 +98,7 @@ const Login = () => {
                   <br />
 
                   <button type="Login" className="btn btn-submit">
-                    Register
+                    Login
                   </button>
                 </form>
               </div>
