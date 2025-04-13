@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../store/auth';
+import { toast } from 'react-toastify';
 
 const AdminContacts = () => {
     const[contacts, setContacts] = useState([]);
@@ -19,6 +20,23 @@ const AdminContacts = () => {
             
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    const deleteContact = async(id)=>{
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/admin/contacts/delete/${id}`,{
+                headers:{
+                    Authorization: authorizationToken,
+                }
+            });
+            if(response.status === 200){
+                toast.success("Message deleted");
+                getAllContactData();
+            }
+        } catch (error) {
+            console.error("Error deleting contact:", error);
+            toast.error("Error while deleting");
         }
     }
     useEffect(() => {
@@ -49,7 +67,7 @@ const AdminContacts = () => {
                                     <td>{curUser.email}</td>
                                     <td>{curUser.message}</td>
                                     <td>Edit</td>
-                                    <td>Delete</td>
+                                    <td><button onClick={()=>deleteContact(curUser._id)}>Delete</button></td>
                                 </tr>
                             );
                         })}
