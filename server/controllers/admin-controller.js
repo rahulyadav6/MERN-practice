@@ -12,6 +12,16 @@ const getAllUsers = async(req,res)=>{
     }
 }
 
+const getUserById = async(req,res)=>{
+    try{
+        const id = req.params.id;
+        const data = await User.findOne({_id: id}, {password:0});
+        return res.status(200).json(data);
+    }catch(error){
+        next(error);
+    }
+}
+
 const deleteUserById = async(req,res)=>{
     try {
         const id = req.params.id;
@@ -33,4 +43,4 @@ const getAllContacts = async(req,res)=>{
         next(error);
     }
 }
-module.exports = {getAllUsers, getAllContacts, deleteUserById};
+module.exports = {getAllUsers, getAllContacts, deleteUserById, getUserById};

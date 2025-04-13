@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../store/auth';
+import { Link } from 'react-router-dom';
 
 const AdminUsers = () => {
     const[users, setUsers] = useState([]);
     const { authorizationToken } = useContext(AuthContext);
+    console.log("re-rendered");
+    
 
     const getAllUsersData = async()=>{
         try {
@@ -21,28 +24,27 @@ const AdminUsers = () => {
             console.log(error);
         }
     }
+    useEffect(() => {
+        getAllUsersData();
+    },[]);
     
     
     // delete the user on delete button click
     const deleteUser = async(id)=>{
         try {
-            console.log(id);
-            const response = await axios.delete(`http://localhost:5000/api/admin/users/delete/${id}`,{
-            headers:{
-                Authorization: authorizationToken
-            }
-        });
-        const data = response.data;
-        console.log("User after deletion:", data);
-        
-        }catch(error){
-            console.log(error);
+            const response = await axios.delete(`http://localhost:5000/api/admin/users/delete/${id}`, {
+                headers: {
+                    Authorization: authorizationToken
+                }
+            });
+            const data = response.data;
+            console.log("User deleted successfully:", data);
+            // Refresh the user list after deletion
+            getAllUsersData();
+        } catch (error) {
+            console.error("Error deleting user:", error);
         }
     }
-    
-    useEffect(() => {
-        getAllUsersData();
-    },[users]);
 
   return (
     <>
@@ -68,7 +70,7 @@ const AdminUsers = () => {
                                     <td>{curUser.username}</td>
                                     <td>{curUser.email}</td>
                                     <td>{curUser.phone}</td>
-                                    <td>Edit</td>
+                                    <td><Link to={`/admin/users/${curUser._id}/edit`}>Edit</Link></td>
                                     <td><button onClick={()=>deleteUser(curUser._id)}>Delete</button></td>
                                 </tr>
                             );
