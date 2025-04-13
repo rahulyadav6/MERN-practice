@@ -6,6 +6,7 @@ import Footer from "./components/footer/Footer";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminContacts from "./pages/AdminContacts";
 import AdminUsers from "./pages/AdminUsers";
+import AdminUpdate from "./pages/AdminUpdate";
 function App() {
 
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout/>}>
             <Route path="users" element={<AdminUsers/>} />
             <Route path="contacts" element={<AdminContacts/>} />
+            <Route path="users/:id/edit" element={<AdminUpdate />} />
           </Route>
         </Routes>
         <Footer/>

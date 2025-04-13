@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/users',authMiddleware, adminMiddleware, adminController.getAllUsers);
 router.get('/users/:id',authMiddleware, adminMiddleware, adminController.getUserById);
+router.patch('/users/update/:id', authMiddleware, adminMiddleware, adminController.updateUserById);
 router.delete('/users/delete/:id',authMiddleware, adminMiddleware, adminController.deleteUserById);
 router.get('/contacts',authMiddleware, adminController.getAllContacts);
 

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../store/auth';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AdminUsers = () => {
     const[users, setUsers] = useState([]);
@@ -39,6 +40,7 @@ const AdminUsers = () => {
             });
             const data = response.data;
             console.log("User deleted successfully:", data);
+            toast.success("Deleted successfully");
             // Refresh the user list after deletion
             getAllUsersData();
         } catch (error) {
