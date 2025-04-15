@@ -4,12 +4,13 @@ import { AuthContext } from '../store/auth';
 import { toast } from 'react-toastify';
 
 const AdminContacts = () => {
+    const {API} = useContext(AuthContext);
     const[contacts, setContacts] = useState([]);
     const { authorizationToken } = useContext(AuthContext);
 
     const getAllContactData = async()=>{
         try {
-            const response = await axios.get(`http://localhost:5000/api/admin/contacts`,{
+            const response = await axios.get(`${API}/api/admin/contacts`,{
                 headers:{
                     Authorization: authorizationToken
                 }
@@ -25,7 +26,7 @@ const AdminContacts = () => {
 
     const deleteContact = async(id)=>{
         try {
-            const response = await axios.delete(`http://localhost:5000/api/admin/contacts/delete/${id}`,{
+            const response = await axios.delete(`${API}/api/admin/contacts/delete/${id}`,{
                 headers:{
                     Authorization: authorizationToken,
                 }

@@ -13,6 +13,11 @@ export const AuthProvider = ({children})=>{
     const [services, setServices] = useState([])
     const authorizationToken = `Bearer ${token}`
     
+
+    const API = import.meta.env.VITE_APP_URI_API;
+    
+
+
     useEffect(()=>{
         setIsLoggedIn(!!token);
     },[token]);
@@ -35,7 +40,7 @@ export const AuthProvider = ({children})=>{
     const userAuthentication = async()=>{
         try {
             setIsLoading(true);
-            const response = await axios.get("http://localhost:5000/api/auth/user", {
+            const response = await axios.get(`${API}/api/auth/user`, {
                 headers:{
                     Authorization: authorizationToken
                 }
@@ -64,7 +69,7 @@ export const AuthProvider = ({children})=>{
 
     const getServices = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/data/service");
+            const response = await axios.get(`${API}/api/data/service`);
             if (response.status === 200) {
                 const data = response.data;
                 console.log("Fetched services data:", data.services);
@@ -84,7 +89,7 @@ export const AuthProvider = ({children})=>{
 
 
 
-    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user, services, authorizationToken, isLoading }}>
+    return <AuthContext.Provider value={{ storeInLs, logoutUser, isLoggedIn, user, services, authorizationToken, isLoading, API }}>
         {children}
     </AuthContext.Provider>
 }

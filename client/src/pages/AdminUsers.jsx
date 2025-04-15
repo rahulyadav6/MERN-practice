@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AdminUsers = () => {
+    const {API} = useContext(AuthContext);
+
     const[users, setUsers] = useState([]);
     const { authorizationToken } = useContext(AuthContext);
     console.log("re-rendered");
@@ -12,7 +14,7 @@ const AdminUsers = () => {
 
     const getAllUsersData = async()=>{
         try {
-            const response = await axios.get(`http://localhost:5000/api/admin/users`,{
+            const response = await axios.get(`${API}/api/admin/users`,{
                 headers:{
                     Authorization: authorizationToken
                 }
@@ -33,7 +35,7 @@ const AdminUsers = () => {
     // delete the user on delete button click
     const deleteUser = async(id)=>{
         try {
-            const response = await axios.delete(`http://localhost:5000/api/admin/users/delete/${id}`, {
+            const response = await axios.delete(`${API}/api/admin/users/delete/${id}`, {
                 headers: {
                     Authorization: authorizationToken
                 }

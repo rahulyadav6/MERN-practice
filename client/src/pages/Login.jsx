@@ -6,7 +6,8 @@ import {  toast } from 'react-toastify';
 
 const Login = () => {
 
-  const { storeInLs } = useContext(AuthContext);
+  const { storeInLs, API } = useContext(AuthContext);
+  const URL = `${API}/api/auth/login`;
 
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -25,7 +26,7 @@ const Login = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {      
-      const response = await axios.post(`http://localhost:5000/api/auth/login`, {
+      const response = await axios.post(`${URL}`, {
         email: user.email.trim(),
         password: user.password.trim()
       });

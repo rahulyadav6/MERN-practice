@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { AuthContext } from '../store/auth';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { API } = useContext(AuthContext);
+  const URL = `${API}/api/auth/register`;
+
   const [user, setUser] = useState({
     username:"",
     email:"",
@@ -21,7 +25,7 @@ const Register = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try{
-      const response = await axios.post(`http://localhost:5000/api/auth/register`, user); 
+      const response = await axios.post(`${URL}`, user); 
 
       
       if(response.status === 201) {

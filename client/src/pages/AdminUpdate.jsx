@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AdminUpdate = () => {
+  const {API} = useContext(AuthContext);
     const navigate = useNavigate();
     const [data, setData] = useState({
         username:"",
@@ -15,7 +16,7 @@ const AdminUpdate = () => {
     const {authorizationToken} = useContext(AuthContext);
     const getSingleUserData = async()=>{
         try{
-            const response = await axios.get(`http://localhost:5000/api/admin/users/${params.id}`,{
+            const response = await axios.get(`${API}/api/admin/users/${params.id}`,{
                 headers:{
                     Authorization: authorizationToken
                 }
@@ -46,7 +47,7 @@ const AdminUpdate = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.patch(`http://localhost:5000/api/admin/users/update/${params.id}`, data, {
+            const response = await axios.patch(`${API}/api/admin/users/update/${params.id}`, data, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: authorizationToken,

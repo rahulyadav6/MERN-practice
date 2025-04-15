@@ -3,6 +3,8 @@ import { AuthContext } from "../store/auth";
 import axios from "axios";
 
 const Contact = () => {
+  const {API} = useContext(AuthContext);
+  const URL = `${API}/api/form/contact`;
   const [contact, setContact] = useState({
     username:"",
     email:"",
@@ -31,7 +33,7 @@ const Contact = () => {
   const handleSubmit = async(e)=>{
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/form/contact", {
+      const response = await axios.post(`${URL}`, {
         username: contact.username,
         email: contact.email,
         message: contact.message
