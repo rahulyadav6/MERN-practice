@@ -13,7 +13,8 @@ const cors = require("cors");
 
 
 const corsOptions = {
-    origin: "https://mern-practice-nu.vercel.app/",
+    // origin: "http://localhost:5173",
+    origin: "https://mern-practice-nu.vercel.app",
     methods:"GET,POST,PUT,DELETE,PATCH,HEAD",
     credentials:true,
 }
